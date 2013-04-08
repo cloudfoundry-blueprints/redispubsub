@@ -1,0 +1,20 @@
+---
+blueprint:
+  name: "Redis PubSub"
+  description: "A multi-instance demo in the form of a chat app, with Redis as a session store and a PubSub service. More details <a href=http://blog.cloudfoundry.com/2013/01/24/scaling-real-time-apps-on-cloud-foundry-using-node-js-and-redis>here</a>."
+  buildInstructions: "npm install"
+  imageURL: "https://raw.github.com/cloudfoundry-blueprints/redispubsub/master/image.png"
+  browseURL: "https://github.com/cloudfoundry-blueprints/redispubsub"
+applications:
+- name: redispubsub
+  framework: node
+  runtime: node08
+  memory: 64M
+  instances: 4
+  url: redispubsub.${target-base}
+  path: .
+  services:
+    redis-pubsub:
+      vendor: redis
+      version: '2.6'
+      tier: free
